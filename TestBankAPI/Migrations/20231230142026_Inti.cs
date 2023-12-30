@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TestBankAPI.Migrations
 {
-    public partial class intiMig : Migration
+    public partial class Inti : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,12 +20,13 @@ namespace TestBankAPI.Migrations
                     AccountName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CurrentAccountBalance = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CurrentAccountBalance = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     AccountType = table.Column<int>(type: "int", nullable: false),
                     AccountNumberGenerated = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PinHash = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     PinSalt = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateLastUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -39,7 +40,7 @@ namespace TestBankAPI.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TransactionUniqueReference = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TransactionAmount = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TransactionAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     TransactionStatus = table.Column<int>(type: "int", nullable: false),
                     TransactionSourceAccount = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TransactionDestinationAccount = table.Column<string>(type: "nvarchar(max)", nullable: false),

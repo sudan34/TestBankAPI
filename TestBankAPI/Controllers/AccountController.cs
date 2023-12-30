@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Principal;
 using System.Text.RegularExpressions;
 using TestBankAPI.Models;
 using TestBankAPI.Services.Interface;
@@ -26,18 +27,18 @@ namespace TestBankAPI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var accont = _mapper.Map<Account>(newAccount);
-                return Ok(_accountService.Create(accont, newAccount.Pin, newAccount.ConfirmPin));
+                var account = _mapper.Map<Account>(newAccount);
+                return Ok(_accountService.Create(account, newAccount.Pin, newAccount.ConfirmPin));
             }
             return BadRequest(newAccount);
         }
 
-        [HttpPost]
-        [Route("get_all_account")]
+        [HttpGet]
+        [Route("get_all_accounts")]
         public IActionResult GetAllAccount()
         {
             var accounts = _accountService.GetAllAccounts();
-            var cleanedAccounts = _mapper.Map<IList<GetAccoutModel>>(accounts);
+            var cleanedAccounts = _mapper.Map<IList<GetAccountModel>>(accounts);
             return Ok(cleanedAccounts);
         }
         [HttpPost]
@@ -55,7 +56,7 @@ namespace TestBankAPI.Controllers
         {
             if (!Regex.IsMatch(AccoutNumber, @"[0][1-9]\d{9}$|^[1-9]/d{9}$")) return BadRequest("Account number must be of 10-digit");
             var account = _accountService.GetByAccoutNumber(AccoutNumber);
-            var cleanedAccount = _mapper.Map<GetAccoutModel>(account);
+            var cleanedAccount = _mapper.Map<GetAccountModel>(account);
             return Ok(cleanedAccount);
         }
 
@@ -65,7 +66,7 @@ namespace TestBankAPI.Controllers
         public IActionResult GetBtAccountById(int Id)
         {
             var account = _accountService.GetById(Id);
-            var cleanedAccount = _mapper.Map<GetAccoutModel>(account);
+            var cleanedAccount = _mapper.Map<GetAccountModel>(account);
             return Ok(cleanedAccount);
         }
 

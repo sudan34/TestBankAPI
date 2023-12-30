@@ -6,8 +6,9 @@ namespace TestBankAPI.Services.Interface
     {
         Response CreateNewTransaction(Transaction transaction);
         Response FindTransactionByDate(DateTime date);
-        Response MakeDeposite(string AccountNumber, decimal Amout, string TransactionPin);
-        Response MakeWithdrawal(string AccountNumber, decimal Amout, string TransactionPin);
-        Response MakeFundsTransfer(string FromAccount, string ToAccount, decimal Amout, string TransactionPin);
+        Response MakeDeposite(string AccountNumber, decimal Amount, string TransactionPin);
+        Response MakeWithdrawal(string AccountNumber, decimal Amount, string TransactionPin);
+        Response MakeFundsTransfer(string FromAccount, string ToAccount, decimal Amount, string TransactionPin);
     }
 }
+  

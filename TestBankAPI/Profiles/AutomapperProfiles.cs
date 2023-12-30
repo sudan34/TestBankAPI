@@ -9,7 +9,8 @@ namespace TestBankAPI.Profiles
         {
             CreateMap<RegisterNewAccountModel, Account>();
             CreateMap<UpdateAccountModel, Account>();
-            CreateMap<Account, GetAccoutModel>();
+            CreateMap<Account, GetAccountModel>();
+            CreateMap<TransactionRequestDto, Transaction>();
         }
     }
 }

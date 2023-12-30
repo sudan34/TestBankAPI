@@ -27,8 +27,15 @@ namespace TestBankAPI.Models
 
         public Account() 
         {
-            AccountNumberGenerated = Convert.ToString((long) Math.Floor(rand.NextDouble() * 9_000_000_000L + 1_000_000_000L));
+            AccountNumberGenerated = GenerateRandomAccountNumber();
             AccountName = $"{FirstName} {LastName}";
+        }
+        private string GenerateRandomAccountNumber()
+        {
+            Random rand = new Random();
+            const string chars = "0123456789";
+            return new string(Enumerable.Repeat(chars, 10)
+              .Select(s => s[rand.Next(s.Length)]).ToArray());
         }
     }
     public enum AccountType { Saving, Current, Corporate, Government }

@@ -2,13 +2,19 @@ using Microsoft.EntityFrameworkCore;
 using TestBankAPI.DAL;
 using TestBankAPI.Services.Implementations;
 using TestBankAPI.Services.Interface;
+using TestBankAPI.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
+var settings = new AppSettings();
+var section = builder.Configuration.GetSection("AppSettings");
+section.Bind(settings);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 // Add services to the container.
 builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<ITransactionService, TransactionService>();
+builder.Services.AddSingleton(settings);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

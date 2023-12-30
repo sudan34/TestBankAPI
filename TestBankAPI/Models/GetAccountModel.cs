@@ -2,7 +2,7 @@
 
 namespace TestBankAPI.Models
 {
-    public class GetAccoutModel
+    public class GetAccountModel
     {
         [Key]
         public int Id { get; set; }

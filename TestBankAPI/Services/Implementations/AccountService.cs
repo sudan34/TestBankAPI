@@ -72,7 +72,7 @@ namespace TestBankAPI.Services.Implementations
 
         IEnumerable<Account> IAccountService.GetAllAccounts()
         {
-            return _dbContext.Accounts.ToList();
+           return _dbContext.Accounts.ToList();
         }
 
         Account IAccountService.GetByAccoutNumber(string AccountNumber)
@@ -89,7 +89,7 @@ namespace TestBankAPI.Services.Implementations
             return account;
         }
 
-        void IAccountService.Update(Account account, string Pin)
+        void IAccountService.Update(Account account, string Pin = null)
         {
             var accToBeUpdated = _dbContext.Accounts.Where(x => x.Email == account.Email).SingleOrDefault();
             if (accToBeUpdated == null) throw new ApplicationException("Account doesn't exit");

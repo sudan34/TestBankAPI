@@ -9,7 +9,7 @@ namespace TestBankAPI.Models
         [Key]
         public int Id { get; set; }
         public string TransactionUniqueReference { get; set; }
-        public string TransactionAmount { get; set; }
+        public decimal TransactionAmount { get; set; }
         public TranStatus TransactionStatus { get; set; }
         public bool IsSuccessful => TransactionStatus.Equals(TranStatus.Success);
         public string TransactionSourceAccount { get; set; }
@@ -17,7 +17,7 @@ namespace TestBankAPI.Models
         public string TransactionParticulars { get; set; }
         public TranType TransactionType { get; set; }
         public DateTime TransactionDate { get; set; }
-        private Transaction()
+        public Transaction()
         {
             TransactionUniqueReference = $"{Guid.NewGuid().ToString().Replace("-", "").Substring(1, 27)}";
         }
