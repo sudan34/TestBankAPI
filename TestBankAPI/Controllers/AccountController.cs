@@ -52,10 +52,10 @@ namespace TestBankAPI.Controllers
 
         [HttpGet]
         [Route("get_by_account_number")]
-        public IActionResult GetBtAccountNumber(string AccoutNumber)
+        public IActionResult GetByAccountNumber(string AccoutNumber)
         {
-            if (!Regex.IsMatch(AccoutNumber, @"[0][1-9]\d{9}$|^[1-9]/d{9}$")) return BadRequest("Account number must be of 10-digit");
-            var account = _accountService.GetByAccoutNumber(AccoutNumber);
+            if (!Regex.IsMatch(AccoutNumber, @"^[0-9]{10}$")) return BadRequest("Account number must be of 10-digit");
+            var account = _accountService.GetByAccountNumber(AccoutNumber);
             var cleanedAccount = _mapper.Map<GetAccountModel>(account);
             return Ok(cleanedAccount);
         }
@@ -63,7 +63,7 @@ namespace TestBankAPI.Controllers
 
         [HttpGet]
         [Route("get_account_by_id")]
-        public IActionResult GetBtAccountById(int Id)
+        public IActionResult GetByAccountById(int Id)
         {
             var account = _accountService.GetById(Id);
             var cleanedAccount = _mapper.Map<GetAccountModel>(account);

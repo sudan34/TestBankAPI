@@ -11,16 +11,15 @@ namespace TestBankAPI.Services.Implementations
     {
         private readonly ApplicationDbContext _context;
         ILogger<TransactionService> _logger;
-        private AppSettings _setting;
-        private static string _ourBankSettlementAccount;
+       // private readonly string _ourBankSettlementAccount;
+        private readonly string _ourBankSettlementAccount = "4597854533"; // Directly assigning the value
         private readonly IAccountService _accountService;
 
-        public TransactionService(ApplicationDbContext context, ILogger<TransactionService> logger, IOptions<AppSettings> setting, IAccountService accountService)
+        public TransactionService(ApplicationDbContext context, ILogger<TransactionService> logger, /*IOptions<AppSettings> setting,*/ IAccountService accountService)
         {
             _context = context;
             _logger = logger;
-            _setting = setting.Value;
-            _ourBankSettlementAccount = _setting.OurBankSettlementAccount;
+            //_ourBankSettlementAccount = setting.Value.OurBankSettlementAccount;
             _accountService = accountService;
         }
 
@@ -56,10 +55,12 @@ namespace TestBankAPI.Services.Implementations
             var authUser = _accountService.Authentication(AccountNumber, TransactionPin);
             if (authUser == null) throw new ApplicationException("Invalid credentials");
             try
-            {
+            { 
+                
                 //for deposit, our banksettlementaccout is the source of money the user a/c 
-                sourceAccount = _accountService.GetByAccoutNumber(_ourBankSettlementAccount);
-                destinationAccount = _accountService.GetByAccoutNumber(AccountNumber);
+                sourceAccount = _accountService.GetByAccountNumber(_ourBankSettlementAccount);
+                destinationAccount = _accountService.GetByAccountNumber(AccountNumber);
+
 
                 sourceAccount.CurrentAccountBalance -= Amount;
                 destinationAccount.CurrentAccountBalance += Amount;
@@ -117,8 +118,8 @@ namespace TestBankAPI.Services.Implementations
             try
             {
                 //for withdtawl, our banksettlementaccout is the destination getting money from the user a/c 
-                sourceAccount = _accountService.GetByAccoutNumber(FromAccount);
-                destinationAccount = _accountService.GetByAccoutNumber(ToAccount);
+                sourceAccount = _accountService.GetByAccountNumber(FromAccount);
+                destinationAccount = _accountService.GetByAccountNumber(ToAccount);
 
                 sourceAccount.CurrentAccountBalance -= Amount;
                 destinationAccount.CurrentAccountBalance += Amount;
@@ -180,8 +181,8 @@ namespace TestBankAPI.Services.Implementations
             try
             {
                 //for withdtawl, our banksettlementaccout is the destination getting money from the user a/c 
-                sourceAccount = _accountService.GetByAccoutNumber(AccountNumber);
-                destinationAccount = _accountService.GetByAccoutNumber(_ourBankSettlementAccount);
+                sourceAccount = _accountService.GetByAccountNumber(AccountNumber);
+                destinationAccount = _accountService.GetByAccountNumber(_ourBankSettlementAccount);
 
                 sourceAccount.CurrentAccountBalance -= Amount;
                 destinationAccount.CurrentAccountBalance += Amount;

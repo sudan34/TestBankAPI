@@ -26,13 +26,13 @@ builder.Services.AddSwaggerGen(
         {
             Title = "Test Bank API Doc",
             Version = "v2",
-            Description = "This is a Bank API",
-            Contact = new Microsoft.OpenApi.Models.OpenApiContact
-            {
-                Name = "Madhusudan Bhattarai",
-                Email = "summerpalpali@gmail.com",
-                Url = new Uri("https://google.com")
-            }
+            Description = "This is a Test Bank API"
+            //Contact = new Microsoft.OpenApi.Models.OpenApiContact
+            //{
+            //    Name = "Madhusudan Bhattarai",
+            //    Email = "summerpalpali@gmail.com",
+            //    Url = new Uri("https://google.com")
+            //}
         });
 
     });

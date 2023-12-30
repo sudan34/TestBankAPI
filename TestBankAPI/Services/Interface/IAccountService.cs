@@ -10,7 +10,7 @@ namespace TestBankAPI.Services.Interface
         void Update(Account account, string Pin = null);
         void Delete(int Id);
         Account GetById(int Id);
-        Account GetByAccoutNumber(string AccountNumber);
+        Account GetByAccountNumber(string AccountNumber);
 
     }
 }

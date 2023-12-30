@@ -75,7 +75,7 @@ namespace TestBankAPI.Services.Implementations
            return _dbContext.Accounts.ToList();
         }
 
-        Account IAccountService.GetByAccoutNumber(string AccountNumber)
+        Account IAccountService.GetByAccountNumber(string AccountNumber)
         {
             var account = _dbContext.Accounts.Where(x => x.AccountNumberGenerated == AccountNumber).FirstOrDefault();
             if (account == null) return null;
